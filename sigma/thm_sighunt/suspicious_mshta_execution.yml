@@ -1,0 +1,32 @@
+title: Malicious HTA v1
+status: experimental
+description: Find Execution of HTA
+logsource:
+  product: windows
+  category: process_creation #EventID: 11, Channel: Microsoft-Windows-Sysmon/Operational
+detection:
+  selection:
+    EventID:
+      - '1'
+    ParentImage|contains:
+      - 'chrome.exe'
+      - 'firefox.exe'
+      - 'brave.exe'
+      - 'edge.exe'
+    CommandLine|contains|all:
+      - 'mshta.exe'
+      - 'Downloads'
+      - '.hta'
+  filter:
+    User:
+      - 'NT AUTHORITY\\SYSTEM'  
+  condition: selection and not filter 
+falsepositives:
+  - 'NA'
+level: high
+references:
+  - 'https://tryhackme.com/room/sighunt'
+tags:
+  - attack.defense
+  - attack.ta0005
+  - attack.sub.t1218.005

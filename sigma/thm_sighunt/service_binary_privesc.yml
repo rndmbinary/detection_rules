@@ -1,0 +1,29 @@
+title: runonce_persistence.yml
+id: 21f99b77-ab57-4a8b-bb66-890ec1bb3af2
+status: experimental 
+description: Service Binary PrivEsc
+author: RNDMBinary
+date: 9.27.2023
+logsource:
+  product: windows
+  category: process_creation
+detection:
+  selection1:
+    EventID:
+      - 1
+    Image|endswith:
+      - 'reg.exe'
+    CommandLine|contains|all:
+      - ' add '
+      - 'RunOnce'
+      - ' /v '
+      - ' /t '
+      - 'REG_SZ'
+      - ' /d '
+  condition: selection1
+fields:
+falsepositives:
+level: high
+tags:
+  - attack.persistance
+  - attack.t1547.001

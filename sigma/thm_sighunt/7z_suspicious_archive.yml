@@ -1,0 +1,26 @@
+title: 7z_suspicious_archive.yml 
+id: 21f99b77-ab57-4a8b-bb66-890ec1bb3af2 
+status: experimental 
+description: 7z archival activity
+author: RNDMBinary 
+date: 9.27.2023
+logsource:
+  product: windows
+  category: process_creation
+detection:
+  selection1:
+    EventID:
+      - 1
+    Image|endswith:
+      - '7z.exe'
+    CommandLine|contains|all:
+      - ' a '
+      - ' * '
+      - ' -p'
+  condition: selection1 
+  fields: 
+  falsepositives: 
+  level: high 
+  tags: 
+    - attack.collection 
+    - attack.t1560.001 
