@@ -1,0 +1,26 @@
+title: curl_exfiltration.yml 
+id: 21f99b77-ab57-4a8b-bb66-890ec1bb3af2 
+status: experimental  
+description: cURL Exfil
+author: RNDMBinary
+date: 9.27.2023
+logsource:
+  product: windows
+  category: process_creation
+detection:
+  selection1:
+    EventID:
+      - 1
+    Image|endswith:
+      - 'curl.exe'
+    CommandLine|contains|all:
+      - '  -d '
+      - ' @ '
+      - '\:\d{1,5}'
+  condition: selection1 
+fields: 
+falsepositives: 
+level: high 
+tags: 
+  - attack.collection 
+  - attack.t1560.001 

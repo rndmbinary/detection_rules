@@ -1,0 +1,22 @@
+title: ransomware_file_encryption.yml 
+id: 21f99b77-ab57-4a8b-bb66-890ec1bb3af2 
+status: experimental  
+description: Huntme Ransomware Artifact 
+author: RNDMBinary
+date: 9.27.2023
+logsource:
+  product: windows
+  category: file_event
+detection:
+  selection1:
+    EventID:
+      - 11
+    TargetFilename|contains:
+      - '.xlsx'
+      - '.huntme'
+  condition: selection1 
+falsepositives: 
+level: high 
+tags: 
+  - attack.collection 
+  - attack.t1560.001

@@ -1,0 +1,28 @@
+title: certutil_file_ingress.yml
+status: experimental
+description: Find Execution of Ransomware
+author: RNDMBinary
+date: 9.27.2023
+logsource:
+  product: windows
+  category: process_creation #EventID: 1, Channel: Microsoft-Windows-Sysmon/Operational
+detection:
+  selection:
+    EventID:
+      - 1
+    Image|endswith:
+      - 'certutil.exe'
+    CommandLine|contains|all:
+      - 'certutil'
+      - '-urlcache'
+      - '-split'
+      - '-f'
+  condition: selection
+falsepositives:
+  -'NA'
+level: high
+references:
+  - 'https://tryhackme.com/room/sighunt'
+tags:
+  - attack.command_and_control
+  - attack.t1105

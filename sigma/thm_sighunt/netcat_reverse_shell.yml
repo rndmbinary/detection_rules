@@ -1,0 +1,28 @@
+title: netcat_reverse_shell.yml 
+id: 21f99b77-ab57-4a8b-bb66-890ec1bb3af2 
+status: experimental  
+description: NetCat Reverse Shell 
+author: RNDMBinary
+date: 9.27.2023
+logsource:
+  product: windows
+  category: process_creation
+detection:
+  selection1:
+    EventID:
+      - 1
+    Image|endswith:
+      - 'nc.exe'
+    CommandLine|contains:
+      - ' -e ' 
+  selection2:
+    Hashes|contains:
+      - '3E59379F585EBF0BECB6B4E06D0FBBF806DE28A4BB256E837B4555F1B4245571'
+      - '523613A7B9DFA398CBD5EBD2DD0F4F38'
+  condition: selection1 OR selection2 
+fields: 
+falsepositives: 
+level: high 
+tags: 
+  - attack.execution 
+  - attack.t1059 
