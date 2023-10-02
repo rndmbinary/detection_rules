@@ -1,4 +1,5 @@
 title: Malicious HTA v1
+id: d9ea4d0b-2995-4777-bb93-f9ce9fdf1fcf 
 status: experimental
 description: Find Execution of HTA
 logsource:

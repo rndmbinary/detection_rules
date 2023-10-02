@@ -1,13 +1,3 @@
-/*
-   YARA Rule Set
-   Author: yarGen Rule Generator
-   Date: 2023-09-28
-   Identifier: file1
-   Reference: https://github.com/Neo23x0/yarGen
-*/
-
-/* Rule Set ----------------------------------------------------------------- */
-
 rule file1_ind3x {
    meta:
       description = "file1 - file ind3x.php"
